@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content%}
+
+		<!-- ======================= Filter Wrap Style 1 ======================== -->
+    <section class="py-3 br-bottom br-top">
+      <div class="container">
+          <div class="row align-items-center justify-content-between">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                  <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="#">Home</a></li>
+                          <li class="breadcrumb-item"><a href="#">Account</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Register</li>
+                      </ol>
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- ============================= Filter Wrap ============================== -->
+  
+<!-- Log In Modal -->
+<div class="row"> 
+<div class="col-md-3"></div>
+<div class="col-md-6 shadow" id="login" >
+  <div class="login-pop-form" role="document">
+    <div class="content my-3" id="loginmodal" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+    
+      <div class="body p-5">
+        <div class="text-center mb-4">
+          <h2 class="m-0 ft-regular">Register</h2>
+        </div> 
+        <form class="mx-1 mx-md-4" method="POST">
+          {% csrf_token %} 
+            <div class="form-group">
+              <label class="form-label" for="reg_name">Your Name</label>
+              <input type="text" name = "full_name" id="reg_name" class="form-control" minlength="3" required>
+            </div>
+           
+            <div class="form-group">
+              <label class="form-label" for="register_email">Your Email</label>
+              <input type="email" name="email" id="register_email" class="form-control"  required>
+            </div>
+           
+            <div class="form-group">
+              <label class="form-label" for="reg_pass">Password</label>
+              <input type="password" name ="pass1" id="reg_pass" class="form-control" minlength="8" required>
+            </div>
+           
+            <div class="form-group">
+              <label class="form-label" for="reg_pass_repeat">Repeat your password</label>
+              <input type="password" name ="pass2" id="reg_pass_repeat" class="form-control"  required >
+            </div>
+           
+          <div class="form-check d-flex justify-content-center mb-5">
+              <p>Already have an account <a href="{% url 'login' %}">LogIn</a></p>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-md full-width bg-dark text-light fs-md ft-medium">Register</button>
+          </div> 
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- End Modal -->
+ 
+
+{% endblock %}

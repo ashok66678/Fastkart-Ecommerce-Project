@@ -1,0 +1,118 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+	<!-- ======================= Top Breadcrubms ======================== -->
+  <div class="gray py-3">
+    <div class="container">
+        <div class="row">
+            <div class="colxl-12 col-lg-12 col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item">Product Details</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======================= Top Breadcrubms ======================== -->
+
+
+<div class="container container2">
+
+        <section class="py-3">
+            <div class="container">
+              <div class="row gx-5">
+                <aside class="col-lg-6">
+                  <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                      <img style="max-width: 100%; max-height: 400px; margin: auto;" class="rounded-4 fit" src="{{ product.imageURL }}" >
+                    </a>
+                  </div>
+                </aside>
+
+                <main class="col-lg-6">
+                  <div class="ps-lg-3">
+                    <h2 class="title text-dark">
+                      {{ product.title }}
+                    </h2>
+                  
+                    <div class="d-flex flex-row my-3">
+                      {% if product.in_stock == True %} 
+                      <span class="text-success ms-2"><strong>In stock</strong></span>
+                      {% else %}
+                      <span class="text-success ms-2"><strong>Out of stock</strong></span>
+                      {% endif %}
+                    </div>
+
+                    <p> {{ product.description }} </p>
+                    {% if product.selling_price == product.price %}
+                    <div class="mb-3">
+                        <h3>Rs {{product.selling_price}}</h3>    
+                    </div>
+                    {% else %}
+                    <div class="mb-3">
+                      <div class="row"><h3>&#x20B9 {{product.selling_price}}</h3>  <h5><del>&#x20B9 {{product.price}}</del></h5></div>
+                  </div>
+                  {% endif %}
+          
+                    <div class="row mb-4">
+                      {% if cat_var == "shoes" %}
+                      <div class="col-md-4 col-6">
+                        <label class="mb-2">Size</label>
+                        <select class="form-select border border-secondary" style="height: 35px;">
+                          <option>5.5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                          <option>11</option>
+                        </select>
+                      </div>
+                      {% else %}
+                      {% endif %}
+                      <!-- col.// -->
+                      <!-- <div class="col-md-4 col-6 mb-3">
+                        <label class="mb-2 d-block">Quantity</label>
+                        <div class="input-group mb-3" style="width: 170px;">
+                          <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                            <i class="bi bi-dash-lg"></i>
+                          </button>
+                          <input type="text" class="form-control text-center border border-secondary" placeholder="1" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                          <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                            <i class="bi bi-plus-lg"></i>
+                          </button>
+                        </div>
+                      </div> -->
+                    
+                    </div>
+                    <a href="{% url 'add-to-cart' product.id %}" class="btn btn-outline-dark shadow-0 bg-color-btn"><i class="bi bi-cart-fill"></i> Add to cart </a>
+                  </div>
+                  <hr />
+               
+                  <div class="py-4 px-1">
+                        <table class="table">
+                            <tbody>
+                            <tr >
+                                <td class="p-3"><i class="fa fa-truck px-2 "></i>Free shipping on all orders</td>
+                                <td class="p-3"><i class="fa fa-home px-2 "></i>Safe and Secure Delivery</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3"><span class="px-2"><img src="{% static 'images/product-return.png' %}" height="20px" width="20px"></span>Easy Returns</td>
+                                <td class="p-3"><span class="px-2"><img src="{% static 'images/warranty.png' %}" height="20px" width="20px"></span>6 Months Warranty</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    <div>
+                </main>
+              </div>
+            </div>
+          </section>
+
+</div>
+
+{% endblock %}
+

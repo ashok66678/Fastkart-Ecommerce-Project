@@ -1,0 +1,211 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+		<!-- ======================= Filter Wrap Style 1 ======================== -->
+        <section class="py-3 br-bottom br-top">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Products</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ============================= Filter Wrap ============================== -->
+        
+        
+        <!-- ======================= All Product List ======================== -->
+        <section class="middle">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 p-xl-0">
+                        <div class="search-sidebar sm-sidebar border">
+                            <div class="search-sidebar-body">
+                            
+                                <!-- Single Option -->
+                                <div class="single_search_boxed">
+                                    <div class="widget-boxed-header px-3">
+                                        <h4 class="mt-3">Categories</h4>
+                                    </div>
+                                    <div class="widget-boxed-body">
+                                        <div class="side-list no-border">
+                                            <div class="filter-card" id="shop-categories">
+
+                                                <!-- Single Filter Card -->
+                                                <div class="single_filter_card">
+                                                    <h5><a href="" data-toggle="collapse" class="collapsed" aria-expanded="false" role="button">Filter<i class="accordion-indicator fa fa-angle-down"></i></a></h5>
+                                                                                                            <div class="card-body">
+                                                            <div class="inner_widget_link">
+                                                                <ul>
+                                                                    {%for c in allcategory%}
+                                                                    <li><a href="/{{c.slug}}"> {{c.name}}</a></li>
+                                                                {%endfor%}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                     
+                                                </div>
+                                                
+
+                                                
+                                                <!-- Single Filter Card -->
+                                                <div class="single_filter_card">
+                                                    <h5><a href="" data-toggle="collapse" class="collapsed" aria-expanded="false" role="button">Filter<i class="accordion-indicator fa fa-angle-down"></i></a></h5>
+                                                                                                            <div class="card-body">
+                                                            <div class="inner_widget_link">
+                                                                <ul>
+                                                                    <li><form>{% if searchpage %}<input type="text" name="q" hidden value="{{searchpage}}">{% endif %}<input type="text" name="price" hidden  value="0-499" id=""><button class="filter-btn" type="submit">Rs. 0 to Rs. 500</button></form></li>
+                                                                    <li><form>{% if searchpage %}<input type="text" name="q" hidden value="{{searchpage}}">{% endif %}<input type="text" name="price" hidden  value="1500-2499" id=""><button class="filter-btn" type="submit">Rs. 1500 to Rs. 2499</button></form></li>
+                                                                    <li><form>{% if searchpage %}<input type="text" name="q" hidden value="{{searchpage}}">{% endif %}<input type="text" name="price" hidden  value="500-1499" id=""><button class="filter-btn" type="submit">Rs. 500 to Rs. 1500</button></form></li>
+                                                                    <li><form>{% if searchpage %}<input type="text" name="q" hidden value="{{searchpage}}">{% endif %}<input type="text" name="price" hidden  value="2500-3499" id=""><button class="filter-btn" type="submit">Rs. 2500 to Rs. 3499</button></form></li>
+                                                                    <li><form>{% if searchpage %}<input type="text" name="q" hidden value="{{searchpage}}">{% endif %}<input type="text" name="price" hidden  value="3500-10000" id=""><button class="filter-btn" type="submit">Rs. 3500 to 10000</button></form></li>
+        
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                     
+                                                </div>
+                                                
+                                             
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
+                        
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                <div class="border mb-3 mfliud">
+                                    <div class="row align-items-center py-2 m-0">
+                                        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-12">
+                                            <h6 class="mb-0 py-2">Products</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- row -->
+                        <div class="row align-items-center rows-products">
+                            
+
+
+                            <!-- {% for p in product_data %}
+                            <div class="col-md-6 col-lg-4 col-xs-2 ">
+                              <div class="card" style=" height: 660px;">
+                                <img src="{% static p.image %}"  class="card-img-top" alt="..." style="height: 400px !important;">
+                                <div class="card-body">
+                                  <h5 class="card-title">{{ p.title }}</h5>
+                                  <p class="card-text">{{ p.description | truncatechars:95 }}</p>
+                                  {% if p.price == p.selling_price %}
+                                  <p>
+                                    <h4 class="py-3"> &#x20B9 {{ p.price }} </h4></p>
+                         
+                                  {% else %}
+                                    <p><h5> &#x20B9 <del>{{ p.price }} </del></h5>
+                                    <h4> &#x20B9 {{ p.selling_price }} </h4></p>
+                                  {% endif %}
+                                  <a href={% url 'add-to-cart' p.id %} type="button" class="btn bg-color-btn">Add to Cart</a>
+                                  <a href="{{p.get_absolute_url}}" class="btn bg-color-btn">View</a>
+                                </div>
+                              </div>
+                            </div>
+                            {% endfor %} -->
+
+
+
+
+
+
+
+                            {%if product_data%}
+                            {% for p in product_data %}
+                            <!-- Single -->
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-6">
+                                <div class="product_grid card b-0">
+                                    <div class="badge bg-info text-white position-absolute ft-regular ab-left text-upper">New</div>
+                                    <div class="card-body p-0">
+                                        <div class="shop_thumb position-relative">
+                                            <a class="card-img-top d-block overflow-hidden" href="{{p.get_absolute_url}}"><img class="card-img-top"
+                                                    src="{% static p.image %}" alt="..." style="height: 300px;"></a>
+                                            <div class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center">
+                                                <div class="edlio"><a href="{% url 'add-to-cart' p.id %}" class="text-white fs-sm ft-medium"><i
+                                                            class="lni lni-shopping-basket mr-1"></i>Add to cart</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer b-0 p-0 pt-2 bg-white">
+                                        <div class="d-flex align-items-start justify-content-between">
+                                            <!-- <div class="text-left">
+                                                                            <div class="form-check form-option form-check-inline mb-1">
+                                                                                <input class="form-check-input" type="radio" name="color2" id="white2">
+                                                                                <label class="form-option-label small rounded-circle" for="white2"><span class="form-option-color rounded-circle blc5"></span></label>
+                                                                            </div>
+                                                                            <div class="form-check form-option form-check-inline mb-1">
+                                                                                <input class="form-check-input" type="radio" name="color2" id="blue2">
+                                                                                <label class="form-option-label small rounded-circle" for="blue2"><span class="form-option-color rounded-circle blc2"></span></label>
+                                                                            </div>
+                                                                            <div class="form-check form-option form-check-inline mb-1">
+                                                                                <input class="form-check-input" type="radio" name="color2" id="yellow2">
+                                                                                <label class="form-option-label small rounded-circle" for="yellow2"><span class="form-option-color rounded-circle blc6"></span></label>
+                                                                            </div>
+                                                                            <div class="form-check form-option form-check-inline mb-1">
+                                                                                <input class="form-check-input" type="radio" name="color2" id="pink2">
+                                                                                <label class="form-option-label small rounded-circle" for="pink2"><span class="form-option-color rounded-circle blc4"></span></label>
+                                                                            </div>
+                                                                        </div> -->
+                            
+                                        </div>
+                                        <div class="text-left">
+                                            <h5 class="fw-bolder ft-bold fs-md mb-0 lh-1 mb-1"><a href="{{p.get_absolute_url}}">{{ p.title }}</a>
+                                            </h5>
+                                            <div class="elis_rty"><span class=" text-dark fs-sm">{{ p.description | truncatechars:95 }}</span></div>
+                                            <div class="elis_rty"><span class="ft-bold text-dark fs-sm">
+                                                    {% if p.price == p.selling_price %}
+                            
+                                                    <h6 class="py-3" style="color: #0fa70f;font-weight: 600;"> &#x20B9; {{ p.price }} </h6>
+                            
+                            
+                                                    {% else %}
+                            
+                                                    <h6 style="color: #acacac;"> &#x20B9; <del>{{ p.price }} </del></h6>
+                                                    <h5 style="color: #0fa70f;font-weight: 600;"> &#x20B9; {{ p.selling_price }} </h5>
+                            
+                                                    {% endif %}
+                            
+                            
+                                                </span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            {% endfor %}
+                            {%else%}
+                            <div class="col-12 text-center">
+                                <h1 class="text-center text-success fw-bold">No Product Found</h1>
+                            </div>
+                            {%endif%}
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <!-- ======================= All Product List ======================== -->
+ 
+{% endblock %}

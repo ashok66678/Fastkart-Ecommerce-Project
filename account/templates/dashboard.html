@@ -1,0 +1,175 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content%}
+
+<div class="gray py-3">
+    <div class="container">
+      <div class="row">
+        <div class="colxl-12 col-lg-12 col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">My Orders</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <section class="middle">
+    <div class="container">
+      <div class="row align-items-start justify-content-between">
+      
+        <div class="col-12 col-md-12 col-lg-4 col-xl-4 text-center miliods">
+          <div class="d-block border rounded mfliud-bot">
+            <div class="dashboard_author px-2 py-5">
+              <div class="dash_auth_thumb circle p-1 border d-inline-flex mx-auto mb-2">
+                <!-- <img src="assets/img/team-1.jpg" class="img-fluid circle" width="100" alt=""> -->
+                <svg class="fill-current" width="25" height="25" viewBox="0 0 22 22" fill="green" xmlns="http://www.w3.org/2000/svg"><path d="M11 9.62499C8.42188 9.62499 6.35938 7.59687 6.35938 5.12187C6.35938 2.64687 8.42188 0.618744 11 0.618744C13.5781 0.618744 15.6406 2.64687 15.6406 5.12187C15.6406 7.59687 13.5781 9.62499 11 9.62499ZM11 2.16562C9.28125 2.16562 7.90625 3.50624 7.90625 5.12187C7.90625 6.73749 9.28125 8.07812 11 8.07812C12.7188 8.07812 14.0938 6.73749 14.0938 5.12187C14.0938 3.50624 12.7188 2.16562 11 2.16562Z" fill=""></path><path d="M17.7719 21.4156H4.2281C3.5406 21.4156 2.9906 20.8656 2.9906 20.1781V17.0844C2.9906 13.7156 5.7406 10.9656 9.10935 10.9656H12.925C16.2937 10.9656 19.0437 13.7156 19.0437 17.0844V20.1781C19.0094 20.8312 18.4594 21.4156 17.7719 21.4156ZM4.53748 19.8687H17.4969V17.0844C17.4969 14.575 15.4344 12.5125 12.925 12.5125H9.07498C6.5656 12.5125 4.5031 14.575 4.5031 17.0844V19.8687H4.53748Z" fill=""></path></svg>
+              </div>
+              <div class="dash_caption">
+                <h4 class="fs-md ft-medium mb-0 lh-1">{{user.full_name}}</h4>
+                <span class="text-muted smalls">{{user.email}}</span>
+              </div>
+            </div>
+            
+            <div class="dashboard_author">
+              <h4 class="px-3 py-2 mb-0 lh-2 gray fs-sm ft-medium text-muted text-uppercase text-left">Dashboard Navigation</h4>
+              <ul class="dahs_navbar">
+                <li><a href="{% url 'dashboard' %}" class="active"><i class="lni lni-shopping-basket mr-2"></i>My Order</a></li>  
+                <li><a href="/account/add_address/" class=" "><i class="lni lni-map-marker mr-2"></i>Addresses</a></li> 
+                <li><a href="{% url 'logout' %}"><i class="lni lni-power-switch mr-2"></i>Log Out</a></li>
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="col-12 col-md-12 col-lg-8 col-xl-8 text-center">
+
+
+            <hr>
+                {% comment %} Address block {% endcomment %}
+                <div class="row"> 
+                    <div class="col">
+                        <div class="row">
+                            <h2>Address</h2>
+                        </div>
+                        <div class="row">
+                            {% for address in addresses %}
+                            {% if address.is_active %}
+                            <div class="col-md-6 col-lg-6 col-sm-4 py-2">
+                            <label >
+                                <input type="radio" name="selected_address" value="{{address.id}}" selected checked class="card-input-element" >
+                                <div class="card card-default card-input">
+                                    <div class="card-header"> 
+                                        <div class="row"> 
+                                        <div class="col-md-6">{{address.name}}</div>
+                                        <div class="col-md-6 text-end"><span class="lead fw-normal my-0 px-2"><a href="{% url 'address-to-delete' address.id %}"><i class="bi bi-trash3 text-danger"></i></a></span></div>
+                                    </div>
+                                        
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Phone : {{address.phone_no}}</li>
+                                        <li class="list-group-item">Address: {{address.address}}</span> {{address.city}} {{address.state}} {{address.zipcode}} INDIA</li>
+                                        {% comment %} <li class="list-group-item">delivery instruction: {{Callbeforedelivering}}</li> {% endcomment %}
+                                    </ul>
+                                </div>
+                            </label>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+            
+                        <a class="btn btn-dark btn-sm my-3" href="/account/add_address/">+ Add New Address</a></button>
+                        <hr class="">
+                    </div>
+                </div>
+
+			{% for order in orders %}			
+            <!-- Single Order List -->
+            <div class="ord_list_wrap border mb-4 mfliud">
+                <div class="ord_list_head gray d-flex align-items-center justify-content-between px-3 py-2">
+                    <div class="olh_flex">
+                        <p class="m-0 p-0"><span class="text-muted">Order Number</span></p>
+                        <h6 class="mb-0 ft-medium">#{{order.transaction_id}}</h6>
+                    </div>	
+                    <!-- <div class="olh_flex">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-dark">Track Order</a>
+                    </div>	 -->
+                </div>
+                <div class="ord_list_body text-left">
+
+                    {% for order_item in OrderItems %}
+                    {% if order_item.order.id == order.id %}
+                     
+                    
+                    
+                    <!-- First Product -->
+                    <div class="row align-items-center justify-content-center m-0 py-4 br-bottom">
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-12">
+                            <div class="cart_single d-flex align-items-start mfliud-bot">
+                                <div class="cart_selected_single_thumb">
+                                    <!-- <a href="#"><img src="assets/img/product/4.jpg" width="75" class="img-fluid rounded" alt=""></a> -->
+                                </div>
+                                <div class="cart_single_caption pl-3">
+                                    <!-- <p class="mb-0"><span class="text-muted small">Dresses</span></p> -->
+                                    <h4 class="product_title fs-sm ft-medium mb-1 lh-1">{{order_item.product.title}} x {{order_item.quantity}}</h4>
+                                     
+                                    <h4 class="fs-sm ft-bold mb-0 lh-1">&#x20B9;{{order_item.get_total_value}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-6">
+                            <p class="mb-1 p-0"><span class="text-muted">Status</span></p>
+                            <div class="delv_status">
+                                {% if order.is_shipped and not order.is_in_transit and not order.is_delivered %}
+                                <span class="ft-medium small text-info bg-light-info rounded px-3 py-1">
+                                    Is Shipped</span>
+                            
+                                {% elif order.is_shipped and order.is_in_transit and not order.is_delivered %}
+                                <span class="ft-medium small text-warning bg-light-warning rounded px-3 py-1">
+                                    In Transit</span>
+                            
+                                {% elif order.is_shipped and order.is_in_transit and order.is_delivered %}
+                                <span class="ft-medium small text-success bg-light-success rounded px-3 py-1">
+                                    Delivered</span>
+                            
+                                {% else %}
+                                <span class="ft-medium small text-danger bg-light-danger rounded px-3 py-1">
+                                    Not Shipped</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-6">
+                            <p class="mb-1 p-0"><span class="text-muted">Order Date:</span></p>
+                            <h6 class="mb-0 ft-medium fs-sm">{{order.date_ordered.date}}</h6>
+                        </div>
+                    </div>
+                    
+                    {% endif %}
+                    {% endfor %}
+                 
+                    
+                </div>
+                <div class="ord_list_footer d-flex align-items-center justify-content-between br-top px-3">
+                    <!-- <div class="col-xl-3 col-lg-3 col-md-4 olf_flex text-left px-0 py-2 br-right"><a href="javascript:void(0);" class="ft-medium fs-sm"><i class="ti-close mr-2"></i>Cancel Order</a></div> -->
+                    <div class="col-xl-9 col-lg-9 col-md-8 pr-0 py-2 olf_flex d-flex align-items-center justify-content-between">
+                        <div class="olf_flex_inner hide_mob"><p class="m-0 p-0"><span class="text-muted medium">Cash on Delivery</span></p></div>
+                        <div class="olf_inner_right"><h5 class="mb-0 fs-sm ft-bold">Total: &#x20B9;{{order.total}}</h5></div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Order List -->
+            {% endfor %}
+         
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+
+{% endblock %}

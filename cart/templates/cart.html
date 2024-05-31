@@ -1,0 +1,106 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<!-- ======================= Top Breadcrubms ======================== -->
+<div class="gray py-3">
+	<div class="container">
+		<div class="row">
+			<div class="colxl-12 col-lg-12 col-md-12">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item"><a href="#">Support</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ======================= Top Breadcrubms ======================== -->
+
+<!-- ======================= Product Detail ======================== -->
+<section class="middle">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+				<div class="text-center d-block mb-5">
+					<h2>Shopping Cart</h2>
+					<h6>({{cart_count}} item in your cart)</h6>
+				</div>
+			</div>
+		</div>
+	 
+
+		<div class="row justify-content-between">
+			<div class="col-12 col-lg-7 col-md-12">
+				<ul class="list-group list-group-sm list-group-flush-y list-group-flush-x mb-4">
+					{% for cart in cart_data %}
+					<li class="list-group-item">
+						<div class="row align-items-center">
+							<div class="col-3">
+								<!-- Image -->
+								<a href="#"><img src="{% static cart.product.image %}" alt="..." class="img-fluid"></a>
+							</div>
+							<div class="col d-flex align-items-center justify-content-between">
+								<div class="cart_single_caption pl-2">
+									<h4 class="product_title fs-md ft-medium mb-3 lh-1">{{cart.product.title}}</h4>
+									<h4 class="fs-md mb-1 lh-1">Product Price &#8377; {{cart.product.selling_price}}
+									</h4>
+									<div class="mb-1">
+										<span class="fs-md text-muted mb-4 pb-2 text-center">Quantity</span>
+										<span class=" my-0 px-2"><a href="{% url 'decrease-quantity' cart.id %}"><i
+													class="fa fa-minus text-dark "></i></a></span>
+										<span class=" mb-0">{{cart.quantity}}</span>
+										<span class=" mb-0 px-2"><a href="{% url 'increase-quantity' cart.id %}"><i
+													class="fa fa-plus text-dark "></i></a></span>
+									</div>
+									<p class="fs-sm ft-medium mb-3 lh-1 text-danger">Total Price &#8377; {{cart.get_total_value}}
+									</p>
+
+								</div>
+								<div class="fls_last"><a href="{% url 'remove-item-cart' cart.id %}" class="close_slide gray"><i
+											class="fa fa-close text-danger fs-md"></i></a></div>
+								{% comment %}
+								<!-- <div class="fls_last"><a href="{% url 'remove-item-cart' cart.id %}" class="close_slide gray"><i class="fa fa-close"></i></a></div> -->
+								{% endcomment %}
+							</div>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="col-12 col-md-12 col-lg-4">
+				<div class="card mb-4 gray mfliud">
+					<div class="card-body">
+						<ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
+							<li class="list-group-item d-flex text-dark fs-sm ft-regular">
+								<span>Subtotal</span> <span class="ml-auto text-dark ft-medium">&#8377; {{total}}</span>
+							</li>
+							<li class="list-group-item d-flex text-dark fs-sm ft-regular">
+								<span>Tax</span> <span class="ml-auto text-dark ft-medium">&#8377; 0.00</span>
+							</li>
+							<li class="list-group-item d-flex text-dark fs-sm ft-regular">
+								<span>Total</span> <span class="ml-auto text-dark ft-medium">&#8377; {{total}}</span>
+							</li>
+							<li class="list-group-item fs-sm text-center">
+								Shipping cost calculated at Checkout *
+							</li>
+						</ul>
+					</div>
+				</div>
+				<a class="btn btn-block btn-dark mb-3"
+					href="{% if cart_count > 0 %}{% url 'checkout' %}{% else %}#{% endif %}">Proceed to Checkout</a>
+
+				<a class="btn-link text-dark ft-medium" href="{% url 'home' %}">
+					<i class="fa fa-arrow-left mr-2"></i> Continue Shopping
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- ======================= Product Detail End ======================== -->
+
+{% endblock %}

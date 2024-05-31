@@ -1,0 +1,237 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+
+
+<section class="p-0">
+  <div class="container-fluid p-0">
+    <div class="row no-gutters">
+    
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <a href="/search/?q=saree" class="card card-overflow card-scale no-radius mb-0">
+        <div class="bg-image" style="background:url({% static 'assets/img/bg.webp'%})no-repeat; background-position:top !important" data-overlay="2"></div>
+          <div class="ct_body">
+            <div class="ct_body_caption">	
+              <h1 class="mb-0 ft-bold text-light">Sarees</h1>
+            </div>
+            <div class="ct_footer">
+              <span class="btn btn-white stretched-link">Shop Sarees <i class="lni lni-arrow-right"></i>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <a href="#" class="card card-overflow card-scale no-radius mb-0">
+        <div class="bg-image" style="background:url(assets/img/a-2.png)no-repeat;" data-overlay="2"></div>
+          <div class="ct_body">
+            <div class="ct_body_caption">	
+              <h1 class="mb-0 ft-bold text-light">Kids</h1>
+            </div>
+            <div class="ct_footer">
+              <span class="btn btn-white stretched-link">Shop Kids <i class="lni lni-arrow-right"></i>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <a href="#" class="card card-overflow card-scale no-radius mb-0">
+        <div class="bg-image" style="background:url(assets/img/a-3.png)no-repeat;" data-overlay="2"></div>
+          <div class="ct_body">
+            <div class="ct_body_caption">	
+              <h1 class="mb-0 ft-bold text-light">Womens</h1>
+            </div>
+            <div class="ct_footer">
+              <span class="btn btn-white stretched-link">Shop Womens <i class="lni lni-arrow-right"></i>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="middle">
+  <div class="container">
+  
+    <div class="row justify-content-center">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="sec_title position-relative text-center">
+          <h2 class="off_title">Trendy Products</h2>
+          <h3 class="ft-bold pt-3">Our Trending Products</h3>
+        </div>
+      </div>
+    </div>
+    
+    <!-- row -->
+    <div class="row align-items-center rows-products">
+
+ 
+    {% for p in product_data %}
+      <!-- Single -->
+      <div class="col-xl-3 col-lg-4 col-md-6 col-6">
+        <div class="product_grid card b-0">
+          <div class="badge bg-danger text-white position-absolute ft-regular ab-left text-upper">Sale</div> 
+          <div class="card-body p-0">
+            <div class="shop_thumb position-relative">
+              <a class="card-img-top d-block overflow-hidden" href="{{p.get_absolute_url}}"><img class="card-img-top" src="{% static p.image %}" alt="..." style="height: 290px;"></a>
+              <div class="product-hover-overlay bg-dark d-flex align-items-center justify-content-center">
+                <div class="edlio"><a href="{% url 'add-to-cart' p.id %}" class="text-white fs-sm ft-medium"><i class="lni lni-shopping-basket mr-1"></i>Add to cart</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footers b-0 pt-3 px-2 bg-white d-flex align-items-start justify-content-center">
+            <div class="text-left">
+              <div class="text-center">
+                <h5 class="fw-bolder fs-md mb-0 lh-1 mb-1"><a href="{{p.get_absolute_url}}">{{ p.title }}</a></h5>
+                <!-- <div class="elis_rty"><span class="ft-bold fs-md text-dark">$119.00</span></div> -->
+                <div class="elis_rty"><span class="ft-bold text-dark fs-sm">
+                  {% if p.price == p.selling_price %}
+                   
+                  <h6 class="py-3"  style="color: #0fa70f;font-weight: 600;"> &#x20B9; {{ p.price }} </h6>
+               
+          
+                  {% else %}
+               
+                  <h6 style="color: #acacac;"> &#x20B9; <del>{{ p.price }} </del></h6>
+                  <h5 style="color: #0fa70f;font-weight: 600;"> &#x20B9; {{ p.selling_price }} </h5>
+                   
+                  {% endif %}
+          
+          
+              </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}   
+    </div>
+    <!-- row -->
+    
+    <div class="row justify-content-center">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="position-relative text-center">
+          <a href="/search/?q=" class="btn stretched-link borders">Explore More<i class="lni lni-arrow-right ml-2"></i></a>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+  
+  
+  <!-- New Section  -->
+  <div class="container container2">
+    <div class="container text-dark pt-3" style="border-radius: 45px 0 45px 0;">
+       
+      <div class="row justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="sec_title position-relative text-center">
+            <h2 class="off_title">Why choose us</h2>
+            <h3 class="ft-bold pt-3">What makes us the best choice for you?</h3>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row mb-4">
+        <div class="col-lg-4 col-md-6">
+          <figure class="d-flex align-items-center mb-4">
+            <span class="rounded-circle bg-white p-3 d-flex me-2 mb-2">
+              <i class="icon_navbar bi bi-coin bi--lg text-black  floating"></i>
+            </span>
+            <figcaption class="info">
+              <h6 class="title">Reasonable prices</h6>
+              <p>Reasonable prices strike a balance between affordability for consumers and profitability for businesses, fostering economic fairness and sustainability.</p>
+            </figcaption>
+          </figure>
+          <!-- itemside // -->
+        </div>
+        <!-- col // -->
+        <div class="col-lg-4 col-md-6">
+          <figure class="d-flex align-items-center mb-4">
+            <span class="rounded-circle bg-white p-3 d-flex me-2 mb-2">
+              <i class="icon_navbar bi bi-hand-thumbs-up-fill  text-black  floating"></i>
+            </span>
+            <figcaption class="info">
+              <h6 class="title">Best quality</h6>
+              <p>Best quality signifies excellence in products or services, embodying superior craftsmanship, reliability, and customer satisfaction. </p>
+            </figcaption>
+          </figure>
+          <!-- itemside // -->
+        </div>
+        <!-- col // -->
+        <div class="col-lg-4 col-md-6">
+          <figure class="d-flex align-items-center mb-4">
+            <span class="rounded-circle bg-white p-3 d-flex me-2 mb-2">
+              <i class="icon_navbar bi bi-globe-americas text-black  floating"></i>
+            </span>
+            <figcaption class="info">
+              <h6 class="title">Worldwide shipping</h6>
+              <p>
+                Worldwide shipping offers global accessibility, ensuring products can reach customers around the globe with convenience and efficiency.</p>
+            </figcaption>
+          </figure>
+          <!-- itemside // -->
+        </div>
+        <!-- col // -->
+        <div class="col-lg-4 col-md-6">
+          <figure class="d-flex align-items-center mb-4">
+            <span class="rounded-circle bg-white p-3 d-flex me-2 mb-2">
+              <i class=" icon_navbar bi bi-person-fill-check text-black  floating"></i>
+            </span>
+            <figcaption class="info">
+              <h6 class="title">Customer satisfaction</h6>
+              <p>Customer satisfaction is the ultimate measure of a business's success, reflecting the ability to meet and exceed customer expectations, fostering loyalty and trust.</p>
+            </figcaption>
+          </figure>
+          <!-- itemside // -->
+        </div>
+        <!-- col // -->
+        <div class="col-lg-4 col-md-6">
+          <figure class="d-flex align-items-center mb-4">
+            <span class="rounded-circle bg-white p-3 d-flex me-2 mb-2">
+              <i class="icon_navbar bi bi-emoji-laughing text-black  floating"></i>
+            </span>
+            <figcaption class="info">
+              <h6 class="title">Happy customers</h6>
+              <p>A happy customer is not just a transaction but a testament to a business's ability to deliver value, service, and exceed expectations.</p>
+            </figcaption>
+          </figure>
+          <!-- itemside // -->
+        </div>
+        <!-- col // -->
+        <div class="col-lg-4 col-md-6">
+          <figure class="d-flex align-items-center mb-4">
+            <span class="rounded-circle bg-white p-3 d-flex me-2 mb-2">
+              <i class="icon_navbar bi bi-inboxes text-black  floating"></i>
+            </span>
+            <figcaption class="info">
+              <h6 class="title">thousand Items</h6>
+              <p>A thousand items provide a diverse selection, catering to a wide range of preferences and needs for customers.</p>
+            </figcaption>
+          </figure>
+          <!-- itemside // -->
+        </div>
+        <!-- col // -->
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
